@@ -59,7 +59,7 @@ SECTIONS
 	.data.start :
 	{
 		_data_lma = LOADADDR(.data.start);
-	} >sdram AT>onChipRam
+	} >sdram AT>sdram
 
 	.data :
 	{

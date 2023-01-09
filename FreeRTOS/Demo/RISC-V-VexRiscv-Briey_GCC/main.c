@@ -32,10 +32,10 @@
 
 /* Run a simple demo just prints 'Blink' */
 #define DEMO_BLINKY	1
-#define mainVECTOR_MODE_DIRECT	1
+// #define mainVECTOR_MODE_DIRECT	1
 
-extern void freertos_risc_v_trap_handler( void );
-extern void freertos_vector_table( void );
+// extern void freertos_risc_v_trap_handler( void );
+// extern void freertos_vector_table( void );
 
 void vApplicationMallocFailedHook( void );
 void vApplicationIdleHook( void );
@@ -45,12 +45,6 @@ void vApplicationTickHook( void );
 int main_blinky( void );
 
 /*-----------------------------------------------------------*/
-
-void print(char *str){
-	while(*str){
-		uart_write(UART,*(str++));
-	}
-}
 
 int main( void )
 {
@@ -62,17 +56,6 @@ int main( void )
 	uartConfig.stop = ONE;
 	uartConfig.clockDivider = 50000000/8/115200-1;
 	uart_applyConfig(UART,&uartConfig);
-	print("Hello!\n");
-	// // trap handler initialization
-	// 	#if( mainVECTOR_MODE_DIRECT == 1 )
-	// {
-	// 	__asm__ volatile( "csrw mtvec, %0" :: "r"( freertos_risc_v_trap_handler ) );
-	// }
-	// #else
-	// {
-	// 	__asm__ volatile( "csrw mtvec, %0" :: "r"( ( uintptr_t )freertos_vector_table | 0x1 ) );
-	// }
-	// #endif
 
 #if defined(DEMO_BLINKY)
 	ret = main_blinky();

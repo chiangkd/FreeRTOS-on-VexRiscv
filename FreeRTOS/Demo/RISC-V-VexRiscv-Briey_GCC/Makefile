@@ -13,7 +13,7 @@ CPPFLAGS = \
 	-I . -I ../Common/include \
 	-I $(RTOS_SOURCE_DIR)/include \
 	-I $(RTOS_SOURCE_DIR)/portable/GCC/RISC-V \
-	-I $(RTOS_SOURCE_DIR)/portable/GCC/RISC-V/chip_specific_extensions/RV32I_CLINT_no_extensions
+	-I $(RTOS_SOURCE_DIR)/portable/GCC/RISC-V/chip_specific_extensions/VexRiscv_Briey
 CFLAGS  = -march=rv32imac -mabi=ilp32 -mcmodel=medany \
 	-Wall \
 	-fmessage-length=0 \

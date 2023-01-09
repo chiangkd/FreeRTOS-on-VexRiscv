@@ -339,7 +339,7 @@ freertos_risc_v_trap_handler:
 asynchronous_interrupt:
     store_x a1, 0( sp )                 /* Asynchronous interrupt so save unmodified exception return address. */
     load_x sp, xISRStackTop             /* Switch to ISR stack. */
-    j handle_interrupt
+    j portasmHANDLE_INTERRUPT           /* Handle external interrupts */
 
 synchronous_exception:
     addi a1, a1, 4                      /* Synchronous so update exception return address to the instruction after the instruction that generated the exeption. */
@@ -371,7 +371,7 @@ application_interrupt_handler:
 handle_exception:
     /* a0 contains mcause. */
     li t0, 11                                   /* 11 == environment call. */
-    bne a0, t0, application_exception_handler   /* Not an M environment call, so some other exception. */
+    bne a0, t0, portasmHANDLE_INTERRUPT           /* Handle external interrupts */
     call vTaskSwitchContext
     j processed_source
 
