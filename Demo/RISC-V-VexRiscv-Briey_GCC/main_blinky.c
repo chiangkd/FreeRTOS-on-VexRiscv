@@ -88,6 +88,7 @@ int f = 1;
 		will not block - it shouldn't need to block as the queue should always
 		be empty at this point in the code. */
 		xQueueSend( xQueue, &ulValueToSend, 0U );
+		portYIELD();
 	}
 }
 
@@ -130,6 +131,7 @@ int f = 1;
 		{
 			vSendString( pcFailMessage );
 		}
+		portYIELD();
 	}
 }
 
